@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="streamlit-custom-component",
+    name="streamlit-node-graph",
     version="0.0.1",
     author="",
     author_email="",
