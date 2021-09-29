@@ -15,7 +15,7 @@ else:
     print(build_dir)
     _component_func = components.declare_component("node_graph", path=build_dir)
 
-def node_graph(model = {}, key="foo"):
+def node_graph(model = False, key="foo"):
     default_compoennt_value = {'model': model, 'lastNodeSelected': None}
     component_value = _component_func(model=model, key=key, default=default_compoennt_value)
     
@@ -26,5 +26,5 @@ def node_graph(model = {}, key="foo"):
 
 if not _RELEASE:
     import streamlit as st
-    # diagram = node_graph(model = st.session_state['model'], key = 'foo')
+    diagram = node_graph()
     # st.session_state['model'] = json.dumps(diagram['model'])
