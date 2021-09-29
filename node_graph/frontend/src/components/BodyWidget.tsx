@@ -76,7 +76,7 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 	}
 
 	componentDidMount(){
-
+		Streamlit.setFrameHeight()
 	}
 	
 	selectionChangedListner(event : any) : void {
