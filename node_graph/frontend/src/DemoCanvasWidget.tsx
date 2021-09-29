@@ -6,8 +6,11 @@ export interface DemoCanvasWidgetProps {
 	color?: string;
 	background?: string;
 }
-
+	
 namespace S {
+	// export const Container = styled.div<{ color: string; background: string }>
+	// `height: 100%;`
+
 	export const Container = styled.div<{ color: string; background: string }>`
 		height: 100%;
 		background-color: ${(p) => p.background};
@@ -45,7 +48,7 @@ namespace S {
 				transparent
 			);
 	`;
-
+	// export const Expand = css``;
 	export const Expand = css`
 		html,
 		body,
@@ -57,6 +60,7 @@ namespace S {
 
 export class DemoCanvasWidget extends React.Component<DemoCanvasWidgetProps> {
 	render() {
+		console.log('rendering node-graph')
 		return (
 			<>
 				<Global styles={S.Expand} />

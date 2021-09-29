@@ -2,6 +2,9 @@
 	margin: 0;
 	padding: 0;
 }
+/* #root {
+		height: 200px;
+} */
 
 html, body, #application{
 	height: 100%;
