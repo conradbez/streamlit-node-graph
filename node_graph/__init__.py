@@ -12,6 +12,7 @@ if not _RELEASE:
 else:
     parent_dir = os.path.dirname(os.path.abspath(__file__))
     build_dir = os.path.join(parent_dir, "frontend/build")
+    print(build_dir)
     _component_func = components.declare_component("node_graph", path=build_dir)
 
 def node_graph(model,key="foo"):
@@ -25,5 +26,3 @@ def node_graph(model,key="foo"):
 if not _RELEASE:
     import streamlit as st
     diagram = node_graph(model = {},key="bar")
-    # if st.button('diagram'):
-    #     diagram = node_graph(model = {},key="foo")
