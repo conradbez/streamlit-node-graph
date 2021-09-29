@@ -14,8 +14,6 @@ export class TSCustomNodeFactory extends AbstractReactFactory<TSCustomNodeModel,
 	}
 
 	generateReactWidget(event :any): JSX.Element {
-		console.log('here______')
-		console.log(event.model)
 		return <TSCustomNodeWidget engine={this.engine as DiagramEngine} node={event.model} />;
 	}
 }

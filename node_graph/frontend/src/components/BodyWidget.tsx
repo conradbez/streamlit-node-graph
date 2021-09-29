@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TrayWidget } from './TrayWidget';
 import { TrayItemWidget } from './TrayItemWidget';
-import createEngine, { DefaultPortFactory, DiagramModel } from '@projectstorm/react-diagrams';
+import createEngine, { DefaultPortFactory, DiagramModel, DefaultLinkFactory } from '@projectstorm/react-diagrams';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../DemoCanvasWidget';
 import { TSCustomNodeFactory } from './custom-node-ts/TSCustomNodeFactory';
@@ -65,7 +65,8 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 		this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': 'Inventory'}) as any);
 		this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': 'Sales'}) as any);
 		this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': 'Conversion'}) as any);
-		// this.state.diagramEngine.getPortFactories().registerFactory(new DefaultPortFactory() as any);
+		this.state.diagramEngine.getPortFactories().registerFactory(new DefaultPortFactory() as any);
+		// this.state.diagramEngine.getPortFactories().registerFactory(new DefaultLinkFactory() as any);
 		
 		var model =  new DiagramModel()
 		if (props.args['model']){
@@ -123,7 +124,6 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 								node = new TSCustomNodeModel({ color: 'rgb(0,192,255)' , type: data.type  });
 							}if (data.type === 'Sales') {
 								node = new TSCustomNodeModel({ color: 'rgb(255,192,0)' , type: data.type  });
-
 							}
 							var point = this.state.diagramEngine.getRelativeMousePoint(event);
 							node.setPosition(point);

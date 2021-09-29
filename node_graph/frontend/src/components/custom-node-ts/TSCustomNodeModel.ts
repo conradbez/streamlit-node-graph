@@ -1,13 +1,14 @@
-import { NodeModel, DefaultPortModel } from '@projectstorm/react-diagrams';
+import { NodeModel, DefaultPortModel, DefaultNodeModel } from '@projectstorm/react-diagrams';
 import { BaseModelOptions } from '@projectstorm/react-canvas-core';
 
 export interface TSCustomNodeModelOptions extends BaseModelOptions {
 	color?: string;
 }
 
-export class TSCustomNodeModel extends NodeModel {
+export class TSCustomNodeModel extends DefaultNodeModel {
 	color: string;
 	type: string
+
 
 	constructor(options: TSCustomNodeModelOptions = {}) {
 		super({
@@ -15,8 +16,12 @@ export class TSCustomNodeModel extends NodeModel {
 		});
 		this.color = options.color || 'red';
 		this.type = options.type
+		this.setupInOutPorts()
 		// setup an in and out port
-		if (["Sales", "Conversion", "Inventory"].includes( this.options.type ))
+	}
+
+	setupInOutPorts(){
+		if (["Sales", "Conversion", "Inventory"].includes( this.type ))
 			{
 				this.addPort(
 					new DefaultPortModel({
@@ -25,7 +30,7 @@ export class TSCustomNodeModel extends NodeModel {
 					})
 				);
 			}
-		if (["Purchase", "Conversion", "Inventory"].includes( this.options.type ))
+		if (["Purchase", "Conversion", "Inventory"].includes( this.type ))
 			{
 				this.addPort(
 					new DefaultPortModel({
@@ -46,10 +51,9 @@ export class TSCustomNodeModel extends NodeModel {
 
 	deserialize(event : any): void {
 		super.deserialize(event);
-		console.log("______")
-		console.log(event)
 		this.color = event.data.color;
 		this.options.type = event.data.type;
-		console.log(this.type)
+		this.type = event.data.type;
+		
 	}
 }
