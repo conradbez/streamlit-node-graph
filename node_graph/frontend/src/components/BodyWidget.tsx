@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TrayWidget } from './TrayWidget';
 import { TrayItemWidget } from './TrayItemWidget';
-import createEngine, { DiagramModel } from '@projectstorm/react-diagrams';
+import createEngine, { DefaultPortFactory, DiagramModel } from '@projectstorm/react-diagrams';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../DemoCanvasWidget';
 import { TSCustomNodeFactory } from './custom-node-ts/TSCustomNodeFactory';
@@ -65,14 +65,20 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 		this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': 'Inventory'}) as any);
 		this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': 'Sales'}) as any);
 		this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': 'Conversion'}) as any);
-
+		// this.state.diagramEngine.getPortFactories().registerFactory(new DefaultPortFactory() as any);
+		
 		var model =  new DiagramModel()
+		if (props.args['model']){
+			model.deserializeModel(JSON.parse(props.args['model']), this.state.diagramEngine);
+		}
+
 		model.registerListener({
 			nodesUpdated: this.sendToStreamlit.bind(this), 
 			linksUpdated: this.sendToStreamlit.bind(this),
 		})
+
 		this.state.diagramEngine.setModel(model)
-		this.state.diagramEngine.getModel()
+
 	}
 
 	componentDidMount(){
@@ -90,7 +96,6 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 		var send_to_streamlit = JSON.stringify(
 			{"model" : model.serialize(), 'lastNodeSelected':this.state.lastNodeSelected}
 			);
-		console.log("getting ready to send to streamlit")
 		Streamlit.setComponentValue(send_to_streamlit);
 	}
 

@@ -60,7 +60,6 @@ namespace S {
 
 export class DemoCanvasWidget extends React.Component<DemoCanvasWidgetProps> {
 	render() {
-		console.log('rendering node-graph')
 		return (
 			<>
 				<Global styles={S.Expand} />

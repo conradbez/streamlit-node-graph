@@ -2,7 +2,7 @@ import os
 import streamlit.components.v1 as components
 import json 
 
-_RELEASE = True
+_RELEASE = False
 
 if not _RELEASE:
     _component_func = components.declare_component(
@@ -18,6 +18,7 @@ else:
 def node_graph(model = {}, key="foo"):
     default_compoennt_value = {'model': model, 'lastNodeSelected': None}
     component_value = _component_func(model=model, key=key, default=default_compoennt_value)
+    
     try:
         return json.loads(component_value)
     except:
@@ -25,4 +26,5 @@ def node_graph(model = {}, key="foo"):
 
 if not _RELEASE:
     import streamlit as st
-    diagram = node_graph(model = {},key="bar")
+    # diagram = node_graph(model = st.session_state['model'], key = 'foo')
+    # st.session_state['model'] = json.dumps(diagram['model'])

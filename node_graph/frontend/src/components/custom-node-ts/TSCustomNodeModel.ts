@@ -16,8 +16,6 @@ export class TSCustomNodeModel extends NodeModel {
 		this.color = options.color || 'red';
 		this.type = options.type
 		// setup an in and out port
-		console.log('here')
-		console.log(this.options.type)
 		if (["Sales", "Conversion", "Inventory"].includes( this.options.type ))
 			{
 				this.addPort(
@@ -48,7 +46,10 @@ export class TSCustomNodeModel extends NodeModel {
 
 	deserialize(event : any): void {
 		super.deserialize(event);
+		console.log("______")
+		console.log(event)
 		this.color = event.data.color;
-		this.type = event.type;
+		this.options.type = event.data.type;
+		console.log(this.type)
 	}
 }
