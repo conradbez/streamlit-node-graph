@@ -15,15 +15,13 @@ else:
     print(build_dir)
     _component_func = components.declare_component("node_graph", path=build_dir)
 
-def node_graph(model = False, key="foo"):
-
+def node_graph(model = False, key="foo") -> dict:
+    
     default_compoennt_value = {'model': json.loads(model), 'lastNodeSelected': None}
     component_value = _component_func(model=model, key=key, default=default_compoennt_value)
-    
-    try:
-        return json.loads(component_value)
-    except:
-        return component_value
+
+    return json.loads(component_value)
+
 
 if not _RELEASE:
     import streamlit as st
