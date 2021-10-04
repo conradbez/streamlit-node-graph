@@ -17,7 +17,7 @@ else:
 
 def node_graph(model = False, key="foo"):
     default_compoennt_value = {'model': model, 'lastNodeSelected': None}
-    component_value = _component_func(model=model, key=key, default=default_compoennt_value)
+    component_value = _component_func(model=model, key=key, default=False)
     
     try:
         return json.loads(component_value)
