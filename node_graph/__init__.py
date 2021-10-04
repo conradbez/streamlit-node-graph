@@ -18,9 +18,9 @@ else:
 def node_graph(model = False, key="foo") -> dict:
     try:
         assert type(model) == type(True) or type(model) == type({}) 
-    except:
-        raise "needs to be a bool or dict passed node_graph as model param"
-    
+    except AssertionError:
+        print("needs to be a bool or dict passed node_graph as model param")
+        raise
     default_compoennt_value = json.dumps({'model': model, 'lastNodeSelected': None})
     if model:
         model=json.dumps(model)

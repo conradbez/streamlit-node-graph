@@ -6,7 +6,7 @@ import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../DemoCanvasWidget';
 import { TSCustomNodeFactory } from './custom-node-ts/TSCustomNodeFactory';
 import { TSCustomNodeModel } from './custom-node-ts/TSCustomNodeModel';
-// import * as _ from 'lodash';
+import * as _ from 'lodash';
 import {
 	Streamlit,
 	StreamlitComponentBase,
@@ -77,6 +77,13 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 			nodesUpdated: this.sendToStreamlit.bind(this), 
 			linksUpdated: this.sendToStreamlit.bind(this),
 		})
+
+		_.forEach(model.getNodes(), (node) => {
+			node.registerListener({
+				selectionChanged: this.selectionChangedListner.bind(this)
+			})
+			});
+		
 
 		this.state.diagramEngine.setModel(model)
 
