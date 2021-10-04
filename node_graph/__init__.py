@@ -16,14 +16,19 @@ else:
     _component_func = components.declare_component("node_graph", path=build_dir)
 
 def node_graph(model = False, key="foo") -> dict:
+    try:
+        assert type(model) == type(True) or type(model) == type({}) 
+    except:
+        raise "needs to be a bool or dict passed node_graph as model param"
     
-    default_compoennt_value = {'model': json.loads(model), 'lastNodeSelected': None}
+    default_compoennt_value = json.dumps({'model': model, 'lastNodeSelected': None})
+    if model:
+        model=json.dumps(model)
     component_value = _component_func(model=model, key=key, default=default_compoennt_value)
-
+    
     return json.loads(component_value)
-
 
 if not _RELEASE:
     import streamlit as st
     diagram = node_graph()
-    # st.session_state['model'] = json.dumps(diagram['model'])
+    st.write(diagram)

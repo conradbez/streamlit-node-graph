@@ -1,8 +1,9 @@
 from node_graph import node_graph
 import streamlit as st
 
-d = node_graph({},key="foo")
+d = node_graph(False,key="foo")
 
 st.write(d['model'])
 
-# d2 = node_graph(d['model'],key="bar")
+if st.checkbox('show second:'):
+    d2 = node_graph(d['model'],key="bar")
