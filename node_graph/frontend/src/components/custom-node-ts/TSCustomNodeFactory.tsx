@@ -4,12 +4,16 @@ import { TSCustomNodeWidget } from './TSCustomNodeWidget';
 import { AbstractReactFactory } from '@projectstorm/react-canvas-core';
 import { DiagramEngine } from '@projectstorm/react-diagrams-core';
 
-export class TSCustomNodeFactory extends AbstractReactFactory<TSCustomNodeModel, DiagramEngine> {
+interface TSCustomNodeFactoryTypes extends AbstractReactFactory<TSCustomNodeModel, DiagramEngine> {
+ }
+
+export class TSCustomNodeFactory extends AbstractReactFactory<TSCustomNodeModel, DiagramEngine> implements TSCustomNodeFactoryTypes {
 	constructor(props:any) {
 		super(props.type);
 	}
+	
 
-	generateModel(initialConfig: any) {
+	generateModel() {
 		return new TSCustomNodeModel();
 	}
 

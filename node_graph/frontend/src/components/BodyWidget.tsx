@@ -61,13 +61,17 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 			diagramEngine: createEngine(),
 			lastNodeSelected: null
 			}
-		this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': 'Purchase'}) as any);
-		this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': 'Inventory'}) as any);
-		this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': 'Sales'}) as any);
-		this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': 'Conversion'}) as any);
-		this.state.diagramEngine.getPortFactories().registerFactory(new DefaultPortFactory() as any);
-		// this.state.diagramEngine.getPortFactories().registerFactory(new DefaultLinkFactory() as any);
-		
+
+		// Regiter factories
+		var item_types = this.props.args['item_types'];
+		console.log(item_types);
+		for (const item of item_types) {
+			var item_name = item['title']
+			this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': item_name}) as any);
+		  }
+		  
+
+
 		var model =  new DiagramModel()
 		if (props.args['model']){
 			model.deserializeModel(JSON.parse(props.args['model']), this.state.diagramEngine);
@@ -108,30 +112,24 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 	}
 
 	render() {
+		var tray_items = this.props.args['item_types']
+		 const tray_item_widgets_to_render = tray_items.map((item:any) => (
+				<TrayItemWidget model={{ type: item['title'] }} name={item['title']} color={item['color']}/>
+			  ))
+
 		return (
 			<S.Body>
 				<S.Content>
 					<TrayWidget>
-						<TrayItemWidget model={{ type: 'Purchase' }} name="Purchase" color="rgb(192,0,255)" />
-						<TrayItemWidget model={{ type: 'Inventory' }} name="Inventory" color="rgb(192,255,0)" />
-						<TrayItemWidget model={{ type: 'Conversion' }} name="Conversion" color="rgb(0,192,255)" />
-						<TrayItemWidget model={{ type: 'Sales' }} name="Sales" color="rgb(255,192,0)" />
+						{tray_item_widgets_to_render}
 					</TrayWidget>
 					<S.Layer
 						onDrop={(event) => {
-							var data = JSON.parse(event.dataTransfer.getData('storm-diagram-node'));
-							// var nodesCount = _.keys(this.state.diagramEngine.getModel().getNodes()).length;
-							var node: TSCustomNodeModel;
-							
-							if (data.type === 'Purchase') {
-								node = new TSCustomNodeModel({ color: 'rgb(192,0,255)' , type: data.type });
-							}if (data.type === 'Inventory') {
-								node = new TSCustomNodeModel({ color: 'rgb(192,255, 0)' , type: data.type  });
-							}if (data.type === 'Conversion') {
-								node = new TSCustomNodeModel({ color: 'rgb(0,192,255)' , type: data.type  });
-							}if (data.type === 'Sales') {
-								node = new TSCustomNodeModel({ color: 'rgb(255,192,0)' , type: data.type  });
-							}
+							var data = JSON.parse(event.dataTransfer.getData('storm-diagram-node'));							
+							var nodeColor = tray_items.filter((i:any) => i['title']==data['type'])[0]['color']
+							var nodePortSelections = tray_items.filter((i:any) => i['title']==data['type'])[0]['port_selection']
+							var node: TSCustomNodeModel = new TSCustomNodeModel({ color: nodeColor , type: data.type, port_selection: nodePortSelections});
+				
 							var point = this.state.diagramEngine.getRelativeMousePoint(event);
 							node.setPosition(point);
 							node.registerListener({
