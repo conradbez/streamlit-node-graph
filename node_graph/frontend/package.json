@@ -21,12 +21,12 @@
     "paths-js": "^0.4.11",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-edit-text": "^4.2.0",
     "react-scripts": "3.4.1",
     "resize-observer-polyfill": "^1.5.1",
     "streamlit-component-lib": "^1.2.0",
     "typescript": "~3.7.2"
   },
-  "peerDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -50,6 +50,7 @@
   },
   "homepage": ".",
   "devDependencies": {
+    "@types/react-edit-text": "^4.0.1",
     "install-peers": "^1.0.3"
   }
 }

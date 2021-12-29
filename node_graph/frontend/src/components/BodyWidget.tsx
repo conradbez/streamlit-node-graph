@@ -102,6 +102,7 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 			lastNodeSelected: event.entity.options.id 
 			}, this.sendToStreamlit)
 	}
+	
 		
 	sendToStreamlit() : void {
 		var model = this.state.diagramEngine.getModel()
@@ -133,7 +134,7 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 							var point = this.state.diagramEngine.getRelativeMousePoint(event);
 							node.setPosition(point);
 							node.registerListener({
-								selectionChanged: this.selectionChangedListner.bind(this)
+								selectionChanged: this.selectionChangedListner.bind(this),
 							})
 							this.state.diagramEngine.getModel().addNode(node);
 							this.forceUpdate();
