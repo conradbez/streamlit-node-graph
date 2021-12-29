@@ -3,8 +3,12 @@ import { DiagramEngine, PortWidget } from '@projectstorm/react-diagrams-core';
 import { TSCustomNodeModel } from './TSCustomNodeModel';
 import { EditText, EditTextarea } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
-import 'font-awesome/css/font-awesome.min.css';
 
+import { library, IconProp } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+library.add(fas)
 
 export interface TSCustomNodeWidgetProps {
 	node: TSCustomNodeModel;
@@ -22,10 +26,9 @@ export class TSCustomNodeWidget extends React.Component<TSCustomNodeWidgetProps,
 	insideNodeGraphic = () => {
 		if (this.props.node.icon !== 'circle'){
 			return (
-				<div className="custom-node-color">
-					<i className={this.props.node.icon}></i>
-				</div>
-			)
+				
+					<FontAwesomeIcon icon={this.props.node.icon as IconProp } fixedWidth color={this.props.node.color} />
+					)
 			}
 		else{
 		return (<div className="custom-node-color" style={{ backgroundColor: this.props.node.color }}>
@@ -44,6 +47,7 @@ export class TSCustomNodeWidget extends React.Component<TSCustomNodeWidgetProps,
 				color: 'white'
 			  }}
 			  >
+
 			<div className="custom-node">
 				
 				{ 
@@ -62,9 +66,9 @@ export class TSCustomNodeWidget extends React.Component<TSCustomNodeWidgetProps,
 					</PortWidget>
 				: <div className="circle-port" style={{ visibility: "hidden" }} />
 				}
-
-				{this.insideNodeGraphic()}
-				
+				<div className="custom-node-color">
+					{this.insideNodeGraphic()}
+				</div>
 			</div>
 			<div >
 				<EditText 
