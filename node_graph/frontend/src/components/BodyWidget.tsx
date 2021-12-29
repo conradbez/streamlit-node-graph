@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TrayWidget } from './TrayWidget';
 import { TrayItemWidget } from './TrayItemWidget';
 import createEngine, { DefaultPortFactory, DiagramModel, DefaultLinkFactory } from '@projectstorm/react-diagrams';
-import { CanvasWidget } from '@projectstorm/react-canvas-core';
+import { CanvasWidget, DeleteItemsAction, CanvasEngineOptions } from '@projectstorm/react-canvas-core';
 import { DemoCanvasWidget } from '../DemoCanvasWidget';
 import { TSCustomNodeFactory } from './custom-node-ts/TSCustomNodeFactory';
 import { TSCustomNodeModel } from './custom-node-ts/TSCustomNodeModel';
@@ -58,7 +58,7 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 	public constructor(props : any) {
 		super(props)
 		this.state = {
-			diagramEngine: createEngine(),
+			diagramEngine: createEngine({registerDefaultDeleteItemsAction : false}),
 			lastNodeSelected: null
 			}
 
@@ -68,6 +68,8 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 			var item_name = item['title']
 			this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': item_name}) as any);
 		  }
+		  this.state.diagramEngine.getActionEventBus().registerAction(new DeleteItemsAction({ keyCodes: [46] }));
+		  console.log(this.state.diagramEngine.getActionEventBus().regi)
 		  
 
 

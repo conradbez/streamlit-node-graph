@@ -37,6 +37,11 @@ export class TSCustomNodeWidget extends React.Component<TSCustomNodeWidgetProps,
 			}
 
 	render() {
+		var borderClass = "custom-node node-border"
+		if (this.props.node.isSelected()){
+			borderClass = 'custom-node node-border-selected'
+		}
+
 		return (
 			<div 
 			style={{
@@ -47,8 +52,8 @@ export class TSCustomNodeWidget extends React.Component<TSCustomNodeWidgetProps,
 				color: 'white'
 			  }}
 			  >
-
-			<div className="custom-node">
+			
+			<div className= {borderClass} >
 				
 				{ 
 				this.props.node.port_selection == 'in' || this.props.node.port_selection == 'both'
@@ -56,7 +61,7 @@ export class TSCustomNodeWidget extends React.Component<TSCustomNodeWidgetProps,
 						<div className="circle-port" />
 					</PortWidget>
 				: <div className="circle-port" style={{ visibility: "hidden" }} />
-			}
+				}
 
 				{ 
 				this.props.node.port_selection == 'out' || this.props.node.port_selection == 'both'
@@ -72,13 +77,13 @@ export class TSCustomNodeWidget extends React.Component<TSCustomNodeWidgetProps,
 			</div>
 			<div >
 				<EditText 
-				placeholder = {this.props.node.name}
-				// defaultValue = {this.props.node.name}
-				onSave= { (e)=>{ 
-					this.props.node.name = e['value'];
-					console.log(this.props.engine.getModel());
-					this.props.engine.getModel().fireEvent({ node: this.props.node, nameChanged: true }, 'nodesUpdated');
-				}  } 
+					onChange = { (e) => { console.log(e) }}
+					placeholder = {this.props.node.name}
+					onSave = { (e)=>{ 
+						this.props.node.name = e['value'];
+						console.log(this.props.engine.getModel());
+						this.props.engine.getModel().fireEvent({ node: this.props.node, nameChanged: true }, 'nodesUpdated');
+					}  } 
 				/>
 			</div>
 			</div>
