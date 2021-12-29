@@ -3,7 +3,7 @@ import streamlit.components.v1 as components
 import json 
 
 _RELEASE = False
-# _RELEASE = True
+_RELEASE = True
 
 if not _RELEASE:
     _component_func = components.declare_component(
@@ -32,7 +32,7 @@ def node_graph(model = False, item_types = [{"title":'item_1',"color":"rgb(255,0
 if not _RELEASE:
     import streamlit as st
     item_types = [
-        {"title":'Purchase',"color":"rgb(255,0, 192)", "port_selection" : 'out', "icon" : 'fa fa-coffee'},
+        {"title":'Purchase',"color":"rgb(255,0, 192)", "port_selection" : 'out'},
         {"title":'Inventory',"color":"rgb(255, 192, 0)", "port_selection" : 'both'},
         {"title":'Conversion',"color":"rgb(0, 192, 255)", "port_selection" : 'both'},
         {"title":'Sales',"color":"rgb(0,255, 192)", "port_selection" : 'in'},
