@@ -64,7 +64,6 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 
 		// Regiter factories
 		var item_types = this.props.args['item_types'];
-		console.log(item_types);
 		for (const item of item_types) {
 			var item_name = item['title']
 			this.state.diagramEngine.getNodeFactories().registerFactory(new TSCustomNodeFactory({'type': item_name}) as any);
@@ -128,8 +127,9 @@ class BodyWidget extends StreamlitComponentBase<BodyWidgetState> {
 						onDrop={(event) => {
 							var data = JSON.parse(event.dataTransfer.getData('storm-diagram-node'));							
 							var nodeColor = tray_items.filter((i:any) => i['title']==data['type'])[0]['color']
+							var nodeIcon =  tray_items.filter((i:any) => i['title']==data['type'])[0]['icon']
 							var nodePortSelections = tray_items.filter((i:any) => i['title']==data['type'])[0]['port_selection']
-							var node: TSCustomNodeModel = new TSCustomNodeModel({ color: nodeColor , type: data.type, port_selection: nodePortSelections});
+							var node: TSCustomNodeModel = new TSCustomNodeModel({ color: nodeColor , type: data.type, port_selection: nodePortSelections, icon: nodeIcon});
 				
 							var point = this.state.diagramEngine.getRelativeMousePoint(event);
 							node.setPosition(point);

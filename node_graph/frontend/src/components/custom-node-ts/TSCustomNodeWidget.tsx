@@ -19,7 +19,15 @@ export class TSCustomNodeWidget extends React.Component<TSCustomNodeWidgetProps,
 
 	render() {
 		return (
-			<div>
+			<div 
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+				alignItems: "center",
+				color: 'white'
+			  }}
+			  >
 			<div className="custom-node">
 				
 				{ 
@@ -42,15 +50,17 @@ export class TSCustomNodeWidget extends React.Component<TSCustomNodeWidgetProps,
 				<div className="custom-node-color" style={{ backgroundColor: this.props.node.color }} />
 				
 			</div>
-				<div text-align="center">
-					<EditText 
-					onSave= { (e)=>{ 
-						this.props.node.name = e['value'];
-						console.log(this.props.engine.getModel());
-						this.props.engine.getModel().fireEvent({ node: this.props.node, nameChanged: true }, 'nodesUpdated');
-					}  } 
-					/>
-				</div>
+			<div >
+				<EditText 
+				placeholder = {this.props.node.name}
+				// defaultValue = {this.props.node.name}
+				onSave= { (e)=>{ 
+					this.props.node.name = e['value'];
+					console.log(this.props.engine.getModel());
+					this.props.engine.getModel().fireEvent({ node: this.props.node, nameChanged: true }, 'nodesUpdated');
+				}  } 
+				/>
+			</div>
 			</div>
 		);
 	}

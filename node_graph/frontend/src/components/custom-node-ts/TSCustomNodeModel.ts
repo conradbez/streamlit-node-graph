@@ -4,7 +4,8 @@ import { BaseModelOptions } from '@projectstorm/react-canvas-core';
 export interface TSCustomNodeModelOptions extends BaseModelOptions {
 	color?: string;
 	port_selection?: string;
-	name?: string
+	name?: string;
+	icon?: string;
 }
 
 export class TSCustomNodeModel extends DefaultNodeModel {
@@ -12,6 +13,7 @@ export class TSCustomNodeModel extends DefaultNodeModel {
 	type: string
 	port_selection: string;
 	name: string;
+	icon?: string;
 
 	constructor(options: TSCustomNodeModelOptions = {}) {
 		super({
@@ -20,7 +22,8 @@ export class TSCustomNodeModel extends DefaultNodeModel {
 		this.color = options.color || 'red';
 		this.type = options.type
 		this.port_selection = options.port_selection
-		this.name = options.name || 'No name'
+		this.name = options.name || options.type
+		this.icon = options.icon || 'circle'
 		this.setupInOutPorts()
 	}
 
