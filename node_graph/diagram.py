@@ -1,4 +1,23 @@
 class Diagram:
+    """
+    Helpful functions for interpreting diagram edited by user
+    
+    Methods
+    -------
+    get_selected_node()
+        Returns currently selected node or none. Node will be in the form: ```
+                {
+        "id":"b4f61e4a-d05d-4335-81de-07cb1a32dd54"
+        "type":"Node Type"
+        "selected":true
+        "name":"Node name"
+        "sources":[]}```
+    process_diagram_output()
+        Returns cleaned up diagram info `(formatted_nodes, formatted links)`
+
+    get_all_nodes_node_inputs()
+        Returns all nodes with a `sources` attribute set to list of nodes they originate from
+    """
     def __init__(self, diagram, ) -> None:
         self.diagram = diagram
         self.model = self.diagram['model']
