@@ -2,9 +2,6 @@
 	margin: 0;
 	padding: 0;
 }
-/* #root {
-		height: 200px;
-} */
 
 html, body, #application{
 	height: 100%;
@@ -17,8 +14,15 @@ html, body, #application{
 	height: 100%;
 }
 
-.custom-node{
+.node-border{
 	border: solid 2px gray;
+}
+
+.node-border-selected{
+	border: solid 2px rgb(0,192,255);
+}
+
+.custom-node{
 	border-radius: 5px;
 	width: 50px;
 	height: 50px;
@@ -44,14 +48,18 @@ html, body, #application{
 }
 
 .circle-port{
-	width: 12px;
-	height: 12px;
+	width: 9px;
+	height: 9px;
 	margin: 2px;
-	border-radius: 4px;
+	border-radius: 50%;
+
+	/* border-color: darkgray; */
+	/* border: solid 1px; */
 	background: darkgray;
 	cursor: pointer;
 }
 
 .circle-port:hover{
-	background: mediumpurple;
+	/* background: mediumpurple; */
+	background: rgb(0,192,255);
 }
