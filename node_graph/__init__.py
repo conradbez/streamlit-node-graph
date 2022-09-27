@@ -1,9 +1,9 @@
 import os
 import streamlit.components.v1 as components
 import json 
-
+from diagram import Diagram
 _RELEASE = False
-_RELEASE = True
+# _RELEASE = True
 
 if not _RELEASE:
     _component_func = components.declare_component(
@@ -26,18 +26,17 @@ def node_graph(model = False, item_types = [{"title":'item_1',"color":"rgb(255,0
     if model:
         model=json.dumps(model)
     component_value = _component_func(model=model, item_types=item_types, key=key, default=default_compoennt_value)
-    
-    return json.loads(component_value)
+    diagram = Diagram(json.loads(component_value))
+    return diagram
 
-if not _RELEASE:
-    import streamlit as st
-    item_types = [
-        {"title":'Purchase',"color":"rgb(255,0, 192)", "port_selection" : 'out', "icon" : 'shopping-cart'},
-        {"title":'Inventory',"color":"rgb(255, 192, 0)", "port_selection" : 'both', "icon" : 'warehouse'},
-        {"title":'Conversion',"color":"rgb(0, 192, 255)", "port_selection" : 'both', "icon": "industry"},
-        {"title":'Sales',"color":"rgb(0,255, 192)", "port_selection" : 'in', "icon" : 'dollar-sign'},
-        
-        ]
+# if not _RELEASE:
+import streamlit as st
+item_types = [
+    {"title":'Purchase',"color":"rgb(255,0, 192)", "port_selection" : 'out', "icon" : 'shopping-cart'},
+    {"title":'Inventory',"color":"rgb(255, 192, 0)", "port_selection" : 'both', "icon" : 'warehouse'},
+    {"title":'Conversion',"color":"rgb(0, 192, 255)", "port_selection" : 'both', "icon": "industry"},
+    {"title":'Sales',"color":"rgb(0,255, 192)", "port_selection" : 'in', "icon" : 'dollar-sign'},
+    ]
 
-    diagram = node_graph(item_types=item_types)
-    st.write(diagram)
+diagram = node_graph(item_types=item_types)
+st.write(diagram.selected)
