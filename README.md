@@ -18,14 +18,20 @@ item_types = [
     ]
 
 diagram = node_graph.node_graph(model=model, item_types=item_types, key='test' )
-st.write(diagram['selected']) # access currently selected node id
-st.write(diagram['model']) # access the underlysing model
+st.write(diagram.selected) # access currently selected node id
+st.write(diagram.model) # access the underlysing model
 ```
 
 ## Features
 
  - specify a node icon with the icon property e.g. ` {"title":'Purchase',"color":"rgb(255,0, 192)", "port_selection" : 'out', "icon" : 'shopping-cart'}` (icons in the font-awesome collection can be used)
  - use diagram utils
+ ```
+diagram = node_graph.node_graph(model=model, item_types=item_types, key='`test`' )
+digram.get_selected_node()
+diagram.get_all_nodes_node_inputs()
+formated_nodes, formated_links = diagram.process_diagram_output()
+```
 
 # Contribute
 
