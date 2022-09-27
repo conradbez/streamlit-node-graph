@@ -38,6 +38,7 @@ uncomment `# _RELEASE = True` in `node_graph/__init__.py` and in another shell
 ## Build
 `cd node_graph/frontend && npm build`
 `cd../..`
+`rm -rf dist/*`
 `python setup.py sdist bdist_wheel`
 
 ## Upload
