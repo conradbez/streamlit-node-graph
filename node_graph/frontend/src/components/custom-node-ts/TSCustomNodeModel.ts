@@ -56,6 +56,7 @@ export class TSCustomNodeModel extends DefaultNodeModel {
 			type: this.type,
 			port_selection: this.port_selection,
 			name: this.name,
+			icon: this.icon,
 		};
 	}
 
@@ -66,5 +67,6 @@ export class TSCustomNodeModel extends DefaultNodeModel {
 		this.type = event.data.type;
 		this.port_selection = event.data.port_selection;
 		this.name = event.data.name;		
+		this.icon = event.data.icon;
 	}
 }

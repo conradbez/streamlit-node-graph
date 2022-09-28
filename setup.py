@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="streamlit-node-graph",
-    version="0.0.8",
+    version="0.0.11",
     author="",
     author_email="",
     description="",

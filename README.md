@@ -7,7 +7,7 @@ and in another shell
 
 ## Build
 `cd node_graph/frontend && npm build`
-`cd../..`
+`cd ../..`
 `python setup.py sdist bdist_wheel`
 
 ## Upload
